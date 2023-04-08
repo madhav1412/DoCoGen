@@ -1,4 +1,4 @@
-# DoCoGen Lite - single script version
+# DoCoGen Lite
 <a name="lite"/>
 
 The DoCoGen Lite script is a single script version of the DoCoGen generator.
