@@ -1,35 +1,42 @@
-# DoCoGen
+# DoCoGen Lite - single script version
+<a name="lite"/>
+
+The DoCoGen Lite script is a single script version of the DoCoGen generator.
+It is a more simple and readable code that does not require PyTorch-Lightning.
+Although there are minor differences from the [official code](#paper_code) which was used in the paper,
+these differences are not significant.
 
 ## How to Run the Code - 
 1. Clone this repository 
-bash
+```bash
 gh repo clone madhav1412/DoCoGen
+```
 
 2. Navigate to the directory
-bash
+```bash
 cd DoCoGen
-
+```
 3. Create conda virtual environment
-bash
+```bash
 conda env create -f docogen_lite_env.yml
-
+```
 4. Activate the create conda environment
-bash
+```bash
 conda activate docogen_lite_env
-
+```
 5. unzip the dataset in the data/ directory
-bash
+```bash
 unzip data/paper_data.zip -d data/
-
+```
 6. Run the DoCoGen script
-bash
+```bash
 python docogen_lite.py --dataset_file_path data/reviews.json --output_dir path/to/output_dir --domains_to_control airline dvd electronics kitchen
-
+```
 
 
 ## Arguments
 
-text
+```text
   -h, --help            show this help message and exit
   --dataset_file_path DATASET_FILE_PATH
                         (str) Path to the dataset file (.json). Must include
@@ -89,3 +96,4 @@ text
                         (bool=True) If `True`, the generated texts will be
                         printed.
   --seed SEED
+```
