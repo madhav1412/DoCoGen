@@ -9,7 +9,7 @@ LOSS_IGNORE_ID = -100
 UNK = 'Unknown'
 SEP = '@@@'
 
-T5_MODEL_NAME = 'google/mt5-base'
+T5_MODEL_NAME = 't5-base'
 MAX_SEQ_LEN = 96
 BATCH_SIZE = 48
 NUM_WORKERS = NUM_CPU

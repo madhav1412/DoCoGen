@@ -20,7 +20,7 @@ from project_utils.functions import load_json
 
 
 def preprocess_datasets(dataset: Union[Dataset, Dict[str, List]],
-                        tokenizer: Union[str, T5TokenizerFast] = 'google/mt5-base',
+                        tokenizer: Union[str, T5TokenizerFast] = 't5-base',
                         max_length: int = 96) -> Dataset:
     def _is_unknown(x: Any) -> bool:
         if x is None:

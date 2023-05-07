@@ -5,7 +5,7 @@
 "values_to_control": ["askubuntu", "apple", "dba", "stats", "physics", "electronics"],
 "splits_for_training": ["unlabeled"],
 "splits_for_augmentations": ["train", "validation"],
-"t5_model_name": "google/mt5-base",
+"t5_model_name": "t5-base",
 "max_seq_len": 96,
 "seed": 42,
 "batch_size": 24,
@@ -21,6 +21,5 @@
 "unknown_orientation_p": 0.05,
 "generator_epochs": 5,
 "generator_classifier_epochs": 3,
-"generator_classifier_batch_size": 64,
-"fast_dev": true
+"generator_classifier_batch_size": 64
 }
