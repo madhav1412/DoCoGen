@@ -8,7 +8,7 @@ from pytorch_lightning import LightningModule
 from torch import Tensor, LongTensor
 from torch.nn import Module
 from transformers import (BatchEncoding, AdamW, get_linear_schedule_with_warmup,
-                          MT5ForConditionalGeneration)
+                          T5ForConditionalGeneration)
 from transformers.modeling_utils import ModuleUtilsMixin
 from transformers.file_utils import ModelOutput
 from modeling.generation.modules import OrientationEmbeddingDict, OrientationPossibleIdsDict
@@ -42,8 +42,8 @@ class ControllableT5Configs:
         as keys and a list of possible words which should be used during the generation.
         :param unknown_orientation: a string that indicates what is the unknown orientation.
         """
-        # assert t5_model_name in ['t5-small', 't5-base', 't5-large', 't5-3b', 't5-11b'],\
-        #     "`t5_model_name` should be: 't5-small', 't5-base', 't5-large', 't5-3b' or 't5-11b'."
+        assert t5_model_name in ['t5-small', 't5-base', 't5-large', 't5-3b', 't5-11b'],\
+            "`t5_model_name` should be: 't5-small', 't5-base', 't5-large', 't5-3b' or 't5-11b'."
         self.t5_model_name = t5_model_name
         assert isinstance(max_seq_len, int), "`max_seq_len` must be an int."
         self.max_seq_len = max_seq_len
@@ -123,7 +123,7 @@ class ControllableT5(Module, ModuleUtilsMixin, GenerationMixin):
             configs = ControllableT5Configs.from_json(configs, **configs_new_kwargs)
         assert isinstance(configs, ControllableT5Configs), "`configs` should be ControllableT5Configs"
         self.configs = configs
-        self.model = MT5ForConditionalGeneration.from_pretrained(self.configs.t5_model_name)
+        self.model = T5ForConditionalGeneration.from_pretrained(self.configs.t5_model_name)
         processor = TextProcessor(tokenizer=self.configs.t5_model_name,
                                   max_seq_len=self.configs.max_seq_len,
                                   skip_special_tokens=True,
