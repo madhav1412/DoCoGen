@@ -5,7 +5,7 @@ from torch import FloatTensor, LongTensor, Tensor
 from torch.autograd import Function
 from torch.nn import Module, Embedding, ModuleDict
 from transformers import PreTrainedTokenizer
-from transformers.generation import LogitsProcessor
+from transformers.generation_logits_process import LogitsProcessor
 from project_utils.constants import DIM, UNK
 
 
