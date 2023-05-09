@@ -12,11 +12,12 @@ import torch
 from datasets import Dataset, load_metric
 from tqdm import tqdm
 from transformers import (set_seed, PreTrainedTokenizerBase, AutoTokenizer, AutoModelForSequenceClassification,
-                          T5ForConditionalGeneration, TrainingArguments, Trainer, pipeline, DataCollatorForSeq2Seq,
+                          MT5ForConditionalGeneration, TrainingArguments, Trainer, pipeline, DataCollatorForSeq2Seq,
                           Seq2SeqTrainingArguments, Seq2SeqTrainer, Pipeline)
 
 # constants
-MODEL_NAME = 't5-base'
+TOKENIZER_MODEL_NAME = 't5-base'
+MODEL_NAME = 'google/mt5-base'
 CLASSIFIER_NAME = 'distilroberta-base'
 BATCH_SIZE_DOCOGEN = 32
 BATCH_SIZE_CLASSIFIER = 64
@@ -358,7 +359,7 @@ def prepare_datasets_and_masker(dataset_file_path: str,
                                 smoothing: List[float] = SMOOTHING,
                                 mask_threshold: float = MASK_THRESHOLD):
     # prepare datasets and masker for training the docogen
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_MODEL_NAME)
     classifier_tokenizer = AutoTokenizer.from_pretrained(classifier_name)
     train_dataset, eval_dataset, labeled_dataset = load_datasets(dataset_file_path, tokenizer, domains_to_control,
                                                                  max_length, eval_size, labeled_size)
@@ -470,7 +471,7 @@ def train_docogen(output_dir: str,
         return accuracy_metric.compute(predictions=predictions, references=labels)
 
     # load DoCoGen and initialize the orientations
-    docogen = T5ForConditionalGeneration.from_pretrained(model_name)
+    docogen = MT5ForConditionalGeneration.from_pretrained(model_name)
     with torch.no_grad():
         for orientation, values in masker.orientations.items():
             init_id, special_id = values['init_id'], values['special_id']
@@ -554,7 +555,7 @@ def generate_domain_counterfactuals(output_dir: str,
     # load DoCoGen
     docogen_path = os.path.join(output_dir, 'trained_docogen')
     tokenizer = AutoTokenizer.from_pretrained(docogen_path)
-    docogen = T5ForConditionalGeneration.from_pretrained(docogen_path)
+    docogen = MT5ForConditionalGeneration.from_pretrained(docogen_path)
 
     # prepare generation pipeline and kwargs
     generation_pipeline = pipeline('text2text-generation', model=docogen, tokenizer=tokenizer)
