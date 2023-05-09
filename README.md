@@ -3,8 +3,7 @@
 
 The DoCoGen Lite script is a single script version of the DoCoGen generator.
 It is a more simple and readable code that does not require PyTorch-Lightning.
-Although there are minor differences from the [official code](#paper_code) which was used in the paper,
-these differences are not significant.
+This modified DoCoGen code can be used to generate counterfactuals in multiple languages supported by HuggingFace MT5 model
 
 ## How to Run the Code - 
 1. Clone this repository 
