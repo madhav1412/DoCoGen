@@ -28,8 +28,8 @@ import torch.distributed as dist
 from torch import nn
 
 from transformers.file_utils import ModelOutput
-from transformers.generation_beam_search import BeamScorer, BeamSearchScorer
-from transformers.generation_logits_process import (
+from transformers.generation import BeamScorer, BeamSearchScorer
+from transformers.generation import (
     EncoderNoRepeatNGramLogitsProcessor,
     ForcedBOSTokenLogitsProcessor,
     ForcedEOSTokenLogitsProcessor,
@@ -47,7 +47,7 @@ from transformers.generation_logits_process import (
     LogitsWarper,  # added
     LogitsProcessor  # added
 )
-from transformers.generation_stopping_criteria import (
+from transformers.generation import (
     MaxLengthCriteria,
     MaxNewTokensCriteria,
     MaxTimeCriteria,
