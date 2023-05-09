@@ -21,7 +21,7 @@ dependencies:
     - scikit-learn
     - scipy
     - seaborn
-    - transformers==4.11.3
+    - transformers
     - sentence-transformers
     - mlflow
     - gensim
@@ -36,4 +36,6 @@ dependencies:
     - wheel
     - tensorboard
     - sortedcontainers
+    - sentencepiece
+    - protobuf==3.20.0
 prefix: $HOME/anaconda3/envs/docogen_env
